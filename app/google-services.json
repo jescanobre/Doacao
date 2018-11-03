@@ -1,0 +1,42 @@
+{
+  "project_info": {
+    "project_number": "784634356284",
+    "firebase_url": "https://doacao-c8536.firebaseio.com",
+    "project_id": "doacao-c8536",
+    "storage_bucket": "doacao-c8536.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:784634356284:android:e69412884270e0ce",
+        "android_client_info": {
+          "package_name": "dsdm.ufc.doacao"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "784634356284-csifv4hgj498ubqfjsaifnkl201nib98.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDPKz4s1ftyAN4-snTbqIh-jJ0w3c-OTCE"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 1,
+          "other_platform_oauth_client": []
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
