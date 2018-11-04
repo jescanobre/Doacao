@@ -26,7 +26,10 @@ public class ObjetoDetalhe extends AppCompatActivity {
         euQuero.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Toast.makeText(ObjetoDetalhe.this, "Solicitação enviada!", Toast.LENGTH_SHORT).show();
+                Intent i = new Intent(ObjetoDetalhe.this,fazerSolicitacao.class);
+                startActivity(i);
+                finish();
+
             }
         });
 

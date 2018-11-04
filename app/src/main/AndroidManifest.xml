@@ -21,6 +21,12 @@
         <activity android:name=".MainActivity"></activity>
         <activity android:name=".ObjetoDetalhe" />
         <activity android:name=".PerfilGeral" />
+        <activity android:name=".meuPerfil" />
+        <activity android:name=".meuObj" />
+        <activity android:name=".minhasSolicitacoes" />
+        <activity android:name=".solicitacaoDetalhe" />
+        <activity android:name=".meusObj" />
+        <activity android:name=".fazerSolicitacao"></activity>
     </application>
 
 </manifest>
