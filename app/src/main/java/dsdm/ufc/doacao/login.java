@@ -14,7 +14,7 @@ import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 
-import dsdm.ufc.doacao.DAO.configuracaoFirebase;
+import dsdm.ufc.doacao.DAO.ConfiguracaoFirebase;
 import dsdm.ufc.doacao.entidades.Usuarios;
 
 public class login extends AppCompatActivity {
@@ -27,7 +27,7 @@ public class login extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+        setContentView(R.layout.activity_login);
         loginBtn = (Button) findViewById(R.id.loginButton);
         cadastroBtn = (Button) findViewById(R.id.cadastroButton);
 
@@ -65,7 +65,7 @@ public class login extends AppCompatActivity {
     }
 
     private void validarLogin(){
-        autenticacao = configuracaoFirebase.getFirebaseAutenticacao();
+        autenticacao = ConfiguracaoFirebase.getFirebaseAutenticacao();
         autenticacao.signInWithEmailAndPassword(usuarios.getEmail(),usuarios.getSenha()).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
             @Override
             public void onComplete(@NonNull Task<AuthResult> task) {
@@ -78,9 +78,12 @@ public class login extends AppCompatActivity {
 
     }
     public void abrirtela(){
-        Intent i = new Intent(login.this,cadastro.class);
+        Intent i = new Intent(login.this,ObjetoDetalhe.class);
         startActivity(i);
+        finish();
     }
+
+
 }
 
 
