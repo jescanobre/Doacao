@@ -1,14 +1,23 @@
 <resources>
     <string name="app_name">Doacao</string>
 
+
     <string name="meuNome">Marcelo</string>
     <string name="meuEmail">marcelo@gmail.com</string>
+
+    <string name="title_activity_main2">Main2Activity</string>
+    <string name="title_home">Home</string>
+    <string name="title_dashboard">Dashboard</string>
+    <string name="title_notifications">Notifications</string>
+
+
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+
 
     <string name="nomeUsuario">Ricardo</string>
     <string name="emailUsuario">ricardo@gmail.com</string>
     <string name="objNome">Cadeira de Balanço</string>
     <string name="objDescricao">Cadeira em ótimo estado, estou doando porque vou me mudar e não posso levar.</string>
     <string name="solicitacaoTexto">Oi, gostei muito da cadeira, moro pertinho! Será que posso ir buscar?</string>
-
 
 </resources>

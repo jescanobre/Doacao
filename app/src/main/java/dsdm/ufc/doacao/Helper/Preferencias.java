@@ -37,6 +37,4 @@ public class Preferencias {
         return preferences.getString(CHAVE_NOME,null);
     }
 
-
-
 }

@@ -44,4 +44,5 @@ public class PerfilGeral extends AppCompatActivity {
             }
         });
     }
+
 }

@@ -13,14 +13,13 @@ public class ConfiguracaoFirebase {
             referenciaFirebase = FirebaseDatabase.getInstance().getReference();
         }
         return referenciaFirebase;
-        }
+    }
 
     public static FirebaseAuth getFirebaseAutenticacao(){
         if(autenticacao==null){
             autenticacao = FirebaseAuth.getInstance();
         }
         return autenticacao;
-        }
-
     }
 
+}
