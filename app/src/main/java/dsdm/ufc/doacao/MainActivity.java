@@ -22,31 +22,31 @@ public class MainActivity extends AppCompatActivity {
         BottomNavigationView bottomNavigationView = (BottomNavigationView) findViewById(R.id.navigation);
 
         bottomNavigationView.setOnNavigationItemSelectedListener(
-            new BottomNavigationView.OnNavigationItemSelectedListener() {
-                @Override
-                public boolean onNavigationItemSelected(@NonNull MenuItem item) {
-                    Fragment selectedFragment = null;
-                    switch ( item.getItemId() ) {
-                        case R.id.navigation_home:
-                            selectedFragment = Home.newInstance();
-                            break;
-                        case R.id.navigation_pesquisar:
-                            selectedFragment = Search.newInstance();
-                            break;
-                        case R.id.navigation_doar:
-                            selectedFragment = Donate.newInstance();
-                            break;
-                        case R.id.navigation_perfil:
-                            selectedFragment = User.newInstance();
-                            break;
-                    }
+                new BottomNavigationView.OnNavigationItemSelectedListener() {
+                    @Override
+                    public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+                        Fragment selectedFragment = null;
+                        switch ( item.getItemId() ) {
+                            case R.id.navigation_home:
+                                selectedFragment = Home.newInstance();
+                                break;
+                            case R.id.navigation_pesquisar:
+                                selectedFragment = Search.newInstance();
+                                break;
+                            case R.id.navigation_doar:
+                                selectedFragment = Donate.newInstance();
+                                break;
+                            case R.id.navigation_perfil:
+                                selectedFragment = User.newInstance();
+                                break;
+                        }
 
-                    FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
-                    transaction.replace(R.id.frame_layout, selectedFragment);
-                    transaction.commit();
-                    return true;
+                        FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
+                        transaction.replace(R.id.frame_layout, selectedFragment);
+                        transaction.commit();
+                        return true;
+                    }
                 }
-            }
         );
 
         FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
