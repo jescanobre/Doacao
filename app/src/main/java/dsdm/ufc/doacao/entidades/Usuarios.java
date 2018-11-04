@@ -19,6 +19,7 @@ public class Usuarios {
 
     public void salvar(){
         DatabaseReference referenciaFirebase = ConfiguracaoFirebase.getFirebase();
+
         referenciaFirebase.child("usuario").child(String.valueOf(getId())).setValue(this);
 
     }
@@ -67,6 +68,5 @@ public class Usuarios {
     public void setSenha(String senha) {
         this.senha = senha;
     }
-
 
 }
