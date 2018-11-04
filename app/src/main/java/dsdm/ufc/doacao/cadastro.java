@@ -19,6 +19,9 @@ import com.google.firebase.auth.FirebaseAuthUserCollisionException;
 import com.google.firebase.auth.FirebaseAuthWeakPasswordException;
 import com.google.firebase.auth.FirebaseUser;
 
+import java.util.HashMap;
+import java.util.Map;
+
 import dsdm.ufc.doacao.DAO.ConfiguracaoFirebase;
 import dsdm.ufc.doacao.Helper.Base64Custom;
 import dsdm.ufc.doacao.Helper.Preferencias;
@@ -80,8 +83,9 @@ public class cadastro extends AppCompatActivity {
                     usuarios.setId(identificadorUsuario);
                     usuarios.salvar();
 
-                    Preferencias preferenciasAndroid = new Preferencias(cadastro.this);
-                    preferenciasAndroid.salvarUsuarioPreferencias(identificadorUsuario,usuarios.getNome());
+
+                    //Preferencias preferenciasAndroid = new Preferencias(cadastro.this);
+                    //preferenciasAndroid.salvarUsuarioPreferencias(identificadorUsuario,usuarios.getNome());
 
                     abrirLoginUsuario();
                 }else{

@@ -78,7 +78,7 @@ public class login extends AppCompatActivity {
 
     }
     public void abrirtela(){
-        Intent i = new Intent(login.this,central.class);
+        Intent i = new Intent(login.this,ObjetoDetalhe.class);
         startActivity(i);
         finish();
     }
