@@ -17,7 +17,8 @@
             </intent-filter>
         </activity>
         <activity android:name=".central" />
-        <activity android:name=".cadastro" />
+        <activity android:name=".cadastro"></activity>
+        <activity android:name=".MainActivity"></activity>
         <activity android:name=".ObjetoDetalhe" />
         <activity android:name=".PerfilGeral" />
     </application>
