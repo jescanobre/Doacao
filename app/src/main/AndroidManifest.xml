@@ -17,8 +17,8 @@
             </intent-filter>
         </activity>
         <activity android:name=".central" />
-        <activity android:name=".cadastro"></activity>
-        <activity android:name=".MainActivity"></activity>
+        <activity android:name=".cadastro" />
+        <activity android:name=".MainActivity" />
         <activity android:name=".ObjetoDetalhe" />
         <activity android:name=".PerfilGeral" />
         <activity android:name=".meuPerfil" />
@@ -26,7 +26,11 @@
         <activity android:name=".minhasSolicitacoes" />
         <activity android:name=".solicitacaoDetalhe" />
         <activity android:name=".meusObj" />
-        <activity android:name=".fazerSolicitacao"></activity>
+        <activity android:name=".fazerSolicitacao" />
+        <activity android:name=".fragments.donate.TitleDonate" />
+        <activity android:name=".fragments.donate.DescriptionDonate" />
+        <activity android:name=".fragments.donate.StatusDonate" />
+        <activity android:name=".fragments.donate.RevisionDonate"></activity>
     </application>
 
 </manifest>
