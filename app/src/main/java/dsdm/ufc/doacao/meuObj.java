@@ -21,7 +21,7 @@ public class meuObj extends AppCompatActivity {
             public void onClick(View v) {
                 Intent i = new Intent(meuObj.this,minhasSolicitacoes.class);
                 startActivity(i);
-                finish();
+
             }
         });
 
