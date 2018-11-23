@@ -11,12 +11,12 @@ import android.widget.ListView;
 public class minhasSolicitacoes extends AppCompatActivity {
 
     ListView sLista;
-
+    minhasSolicitacoes mContext;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_minhas_solicitacoes);
-
+        mContext = this;
         sLista = (ListView)findViewById(R.id.sLista);
 
         final String soli[] = new String[]{"Ricardo"};
@@ -28,7 +28,7 @@ public class minhasSolicitacoes extends AppCompatActivity {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 if(soli[position].equals("Ricardo")){
-                    Intent i = new Intent(minhasSolicitacoes.this,solicitacaoDetalhe.class);
+                    Intent i = new Intent(mContext,solicitacaoDetalhe.class);
 
                     startActivity(i);
                 }

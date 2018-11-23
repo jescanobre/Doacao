@@ -18,7 +18,7 @@ public class solicitacaoDetalhe extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_solicitacao_detalhe);
 
-        user = (TextView)findViewById(R.id.usuarioNome);
+        user = (TextView)findViewById(R.id.userNome);
         aceita = (Button)findViewById(R.id.aceitarBtn);
         recusa = (Button)findViewById(R.id.recusarBtn);
 
@@ -27,7 +27,7 @@ public class solicitacaoDetalhe extends AppCompatActivity {
             public void onClick(View v) {
                 Intent i = new Intent(solicitacaoDetalhe.this,PerfilGeral.class);
                 startActivity(i);
-                finish();
+
             }
         });
 
@@ -37,7 +37,7 @@ public class solicitacaoDetalhe extends AppCompatActivity {
                 Toast.makeText(solicitacaoDetalhe.this, "Solicitação Aceita!", Toast.LENGTH_SHORT).show();
                 Intent i = new Intent(solicitacaoDetalhe.this,meuObj.class);
                 startActivity(i);
-                finish();
+
             }
         });
 
@@ -47,7 +47,7 @@ public class solicitacaoDetalhe extends AppCompatActivity {
                 Toast.makeText(solicitacaoDetalhe.this, "Solicitação Recusada!", Toast.LENGTH_SHORT).show();
                 Intent i = new Intent(solicitacaoDetalhe.this,meuObj.class);
                 startActivity(i);
-                finish();
+
             }
         });
 
