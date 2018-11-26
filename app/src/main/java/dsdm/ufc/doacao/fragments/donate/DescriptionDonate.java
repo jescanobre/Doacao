@@ -8,6 +8,7 @@ import android.widget.Button;
 import android.widget.EditText;
 
 import dsdm.ufc.doacao.R;
+import dsdm.ufc.doacao.entidades.Objeto;
 
 public class DescriptionDonate extends AppCompatActivity {
 
@@ -21,8 +22,9 @@ public class DescriptionDonate extends AppCompatActivity {
         EditText editText = findViewById(R.id.edt_description);
         String description = editText.getText().toString();
         Intent intent = new Intent( DescriptionDonate.this, StatusDonate.class );
-        intent.putExtras(getIntent().getExtras());
-        intent.putExtra("description", description);
+        Objeto objeto = (Objeto) getIntent().getSerializableExtra("objeto");
+        objeto.setDescricao(description);
+        intent.putExtra("objeto", objeto);
         startActivity(intent);
     }
 }

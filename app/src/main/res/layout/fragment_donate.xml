@@ -6,6 +6,16 @@
     android:orientation="vertical"
     tools:context=".fragments.Donate">
 
+    <GridView
+        android:id="@+id/layout_of_images"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:columnWidth="90dp"
+        android:numColumns="auto_fit"
+        android:verticalSpacing="10dp"
+        android:horizontalSpacing="10dp"
+        android:stretchMode="columnWidth"></GridView>
+
     <Button
         android:id="@+id/btn_add_foto"
         android:layout_width="match_parent"

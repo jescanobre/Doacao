@@ -8,14 +8,20 @@
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="vertical">
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        tools:layout_editor_absoluteX="0dp"
+        tools:layout_editor_absoluteY="0dp">
 
-        <ImageView
-            android:id="@+id/imageView2"
+        <GridView
+            android:id="@+id/display_images"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            app:srcCompat="@drawable/download" />
+            android:columnWidth="90dp"
+            android:numColumns="auto_fit"
+            android:verticalSpacing="10dp"
+            android:horizontalSpacing="10dp"
+            android:stretchMode="columnWidth"/>
 
         <TextView
             android:id="@+id/textView20"
@@ -58,19 +64,19 @@
             android:layout_height="wrap_content"
             android:orientation="horizontal">
 
-                <RadioButton
-                    android:id="@+id/rbtn_used"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:text="usado" />
+            <RadioButton
+                android:id="@+id/rbtn_used"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="usado" />
 
-                <RadioButton
-                    android:id="@+id/rbtn_not_used"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:text="não usado" />
+            <RadioButton
+                android:id="@+id/rbtn_not_used"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="não usado" />
 
         </RadioGroup>
 

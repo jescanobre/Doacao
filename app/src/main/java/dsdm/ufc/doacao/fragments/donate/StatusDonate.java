@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.view.View;
 
 import dsdm.ufc.doacao.R;
+import dsdm.ufc.doacao.entidades.Objeto;
 
 public class StatusDonate extends AppCompatActivity {
 
@@ -18,13 +19,16 @@ public class StatusDonate extends AppCompatActivity {
     public void btnUsedOnCLick(View view) {
         int id = view.getId();
         Intent intent = new Intent(StatusDonate.this, RevisionDonate.class);
+        Objeto objeto = (Objeto) getIntent().getSerializableExtra("objeto");
+
         if( id == R.id.btn_used ) {
-            intent.putExtra("status", true);
+            objeto.setEhUsado(true);
         }
         else {
-            intent.putExtra("status", false);
+            objeto.setEhUsado(false);
         }
-        intent.putExtras(getIntent().getExtras());
+
+        intent.putExtra("objeto", objeto);
         startActivity(intent);
     }
 }
