@@ -52,8 +52,6 @@ public class ImageAdapter extends BaseAdapter {
         View view = layoutInflater.inflate(R.layout.simple_list_item_image, null);
         ImageView imageView = view.findViewById(R.id.image1);
 
-        Log.w("ADAPTER", ((Integer) position).toString());
-
         Bitmap bitmap = bitmaps.get(position);
         bitmap = Bitmap.createScaledBitmap(bitmap, 200, 200, true);
         imageView.setImageBitmap(bitmap);

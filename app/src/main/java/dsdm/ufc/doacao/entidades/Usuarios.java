@@ -2,9 +2,7 @@ package dsdm.ufc.doacao.entidades;
 
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.Exclude;
-import com.google.firebase.database.FirebaseDatabase;
 
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -16,6 +14,15 @@ public class Usuarios {
     String nome;
     String email;
     String senha;
+
+    @Exclude
+    public final static String KEY_ID    = "id";
+    @Exclude
+    public final static String KEY_NAME  = "name";
+    @Exclude
+    public final static String KEY_EMAIL = "email";
+    @Exclude
+    public final static String KEY_SENHA = "senha";
 
     public void salvar(){
         DatabaseReference referenciaFirebase = ConfiguracaoFirebase.getFirebase();

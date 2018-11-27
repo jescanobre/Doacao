@@ -19,6 +19,7 @@ import dsdm.ufc.doacao.R;
 import dsdm.ufc.doacao.custom_adapters.ImageAdapter;
 import dsdm.ufc.doacao.entidades.Objeto;
 import dsdm.ufc.doacao.fragments.Donate;
+import dsdm.ufc.doacao.managers.SessionManager;
 
 public class RevisionDonate extends AppCompatActivity {
 
@@ -26,11 +27,14 @@ public class RevisionDonate extends AppCompatActivity {
     private EditText edtDescription;
     private RadioButton rbUsed;
     private RadioButton rbNotUsed;
+    private SessionManager session;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_revision_donate);
+
+        session = new SessionManager(getApplicationContext());
 
         Objeto objeto = (Objeto) getIntent().getSerializableExtra("objeto");
 
@@ -63,7 +67,10 @@ public class RevisionDonate extends AppCompatActivity {
                         Objeto objeto = (Objeto) getIntent().getSerializableExtra("objeto");
                         updateObjeto(objeto);
 
-                        Log.w("OBJETO", objeto.toString());
+
+                        Log.w("User", session.getUser().toString());
+                        objeto.setIdDoador(session.getUser().getId());
+
                         objeto.salvar(getApplicationContext(), Donate.getImages() );
                         Intent intent = new Intent(RevisionDonate.this, MainActivity.class);
                         startActivity(intent);

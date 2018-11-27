@@ -8,14 +8,19 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.ListView;
 
 import dsdm.ufc.doacao.R;
+import dsdm.ufc.doacao.managers.SessionManager;
 import dsdm.ufc.doacao.meuObj;
 
 public class User extends Fragment {
 
+    private SessionManager sessionManager;
+
     public User() {
+
     }
 
     public static User newInstance() {
@@ -50,7 +55,24 @@ public class User extends Fragment {
                 }
             }
         });
+
+        sessionManager = new SessionManager(view.getContext());
+
+        Button btnLogout = view.findViewById(R.id.btn_logout);
+        btnLogout.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                logout();
+            }
+        });
+
+
+
         return view;
+    }
+
+    public void logout() {
+        sessionManager.logout();
     }
 
 }

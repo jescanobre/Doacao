@@ -22,6 +22,7 @@ import com.google.firebase.database.ValueEventListener;
 
 import dsdm.ufc.doacao.DAO.ConfiguracaoFirebase;
 import dsdm.ufc.doacao.entidades.Usuarios;
+import dsdm.ufc.doacao.managers.SessionManager;
 
 public class login extends AppCompatActivity {
 
@@ -29,10 +30,17 @@ public class login extends AppCompatActivity {
     Button cadastroBtn;
     private FirebaseAuth autenticacao;
     private Usuarios usuarios;
+    private SessionManager session;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        session = new SessionManager(getApplicationContext());
+
+        if( session.isLoggedIn() )
+            abrirtela();
+
         setContentView(R.layout.activity_login);
         loginBtn = (Button) findViewById(R.id.loginButton);
         cadastroBtn = (Button) findViewById(R.id.cadastroButton);
@@ -55,6 +63,7 @@ public class login extends AppCompatActivity {
                     validarLogin();
 
                     getUsuarioByEmail();
+                    Log.w("TESTE", session.getUser().toString() );
 
                 }else{
                     Toast.makeText(login.this, "Preencha todos os campos!", Toast.LENGTH_SHORT).show();
@@ -102,12 +111,11 @@ public class login extends AppCompatActivity {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 if( dataSnapshot.exists() ) {
+                    Usuarios usuario = new Usuarios();
                     for ( DataSnapshot data : dataSnapshot.getChildren() ) {
-                        Usuarios usuario = data.getValue( Usuarios.class );
-                        usuarios.setId(usuario.getId());
-                        usuarios.setNome(usuario.getNome());
-                        Log.w("TESTE", usuarios.toString() );
+                        usuario = data.getValue( Usuarios.class );
                     }
+                    session.createLoginSession(usuario);
                 } else {
                     Log.w("ERRO", "deu ruim!");
                 }

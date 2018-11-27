@@ -28,6 +28,11 @@ public class Objeto implements Serializable {
     Boolean ehUsado;
     List<String> imagens;
 
+    String idDoador;
+    String idReceptor;
+
+    List<String> solitações;
+
     @Exclude
     private final String REFERENCE_OBJECT = "objeto";
     @Exclude
@@ -36,6 +41,8 @@ public class Objeto implements Serializable {
     public Objeto() {
         estado = false;
         imagens = new ArrayList<String>();
+        solitações = new ArrayList<String>();
+        idReceptor = "";
     }
 
     public String getId() {
@@ -84,6 +91,30 @@ public class Objeto implements Serializable {
 
     public void setEstado(Boolean estado) {
         this.estado = estado;
+    }
+
+    public String getIdDoador() {
+        return idDoador;
+    }
+
+    public void setIdDoador(String idDoador) {
+        this.idDoador = idDoador;
+    }
+
+    public String getIdReceptor() {
+        return idReceptor;
+    }
+
+    public void setIdReceptor(String idReceptor) {
+        this.idReceptor = idReceptor;
+    }
+
+    public List<String> getSolitações() {
+        return solitações;
+    }
+
+    public void setSolitações(List<String> solitações) {
+        this.solitações = solitações;
     }
 
     @Override

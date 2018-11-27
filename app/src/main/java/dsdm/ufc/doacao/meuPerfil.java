@@ -10,15 +10,19 @@ import android.widget.ListView;
 
 import java.util.ArrayList;
 
+import dsdm.ufc.doacao.managers.SessionManager;
+
 public class meuPerfil extends AppCompatActivity {
 
     ListView objLista;
+    SessionManager sessionManager;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_meu_perfil);
 
+        sessionManager = new SessionManager(getApplicationContext());
 
         objLista = (ListView) findViewById(R.id.objetosLista);
 
@@ -39,4 +43,6 @@ public class meuPerfil extends AppCompatActivity {
             }
         });
     }
+
+
 }
