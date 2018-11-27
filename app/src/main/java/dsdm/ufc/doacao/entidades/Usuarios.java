@@ -69,4 +69,13 @@ public class Usuarios {
         this.senha = senha;
     }
 
+    @Override
+    public String toString() {
+        return "Usuarios{" +
+                "id='" + id + '\'' +
+                ", nome='" + nome + '\'' +
+                ", email='" + email + '\'' +
+                ", senha='" + senha + '\'' +
+                '}';
+    }
 }

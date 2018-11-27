@@ -2,16 +2,9 @@ package dsdm.ufc.doacao.entidades;
 
 import android.content.Context;
 import android.graphics.Bitmap;
-import android.net.Uri;
-import android.support.annotation.NonNull;
 import android.util.Log;
-import android.widget.Toast;
 
-import com.google.android.gms.tasks.Continuation;
-import com.google.android.gms.tasks.OnCompleteListener;
-import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
-import com.google.android.gms.tasks.Task;
 import com.google.firebase.database.DatabaseReference;
 
 import java.io.ByteArrayOutputStream;
@@ -111,7 +104,6 @@ public class Objeto implements Serializable {
         int hash = 1;
         hash = hash*13 + titulo.hashCode();
         hash = hash*31  + descricao.hashCode();
-        hash = hash*17  + ehUsado.hashCode();
         return hash;
     }
 
