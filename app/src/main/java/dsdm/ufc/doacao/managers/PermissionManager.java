@@ -1,6 +1,5 @@
 package dsdm.ufc.doacao.managers;
 
-import android.Manifest;
 import android.app.Activity;
 import android.content.DialogInterface;
 import android.content.pm.PackageManager;

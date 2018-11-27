@@ -2,9 +2,15 @@ package dsdm.ufc.doacao.entidades;
 
 import android.content.Context;
 import android.graphics.Bitmap;
+import android.support.annotation.NonNull;
+import android.support.annotation.Nullable;
+import android.util.ArrayMap;
 import android.util.Log;
 
 import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.firebase.database.ChildEventListener;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 
 import java.io.ByteArrayOutputStream;
@@ -15,6 +21,8 @@ import java.util.List;
 import java.util.Map;
 import java.util.Objects;
 import com.google.firebase.database.Exclude;
+import com.google.firebase.database.Query;
+import com.google.firebase.database.ValueEventListener;
 import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
 
@@ -34,9 +42,15 @@ public class Objeto implements Serializable {
     List<String> solitações;
 
     @Exclude
-    private final String REFERENCE_OBJECT = "objeto";
+    public static Map<String, Objeto> objetos = new ArrayMap<String, Objeto>();
+
     @Exclude
-    private final String REFERENCE_IMAGE  = "imagens";
+    public static final String REFERENCE_OBJECT = "objeto";
+    @Exclude
+    public static final String REFERENCE_IMAGE  = "imagens";
+
+    @Exclude
+    public static boolean isListenerAdded = false;
 
     public Objeto() {
         estado = false;
@@ -149,7 +163,7 @@ public class Objeto implements Serializable {
                 '}';
     }
 
-    public void salvar(final Context context, List<Bitmap> bitmaps) {
+    public void salvar(final Context context, final List<Bitmap> bitmaps) {
         StorageReference referenciaFirebase = ConfiguracaoFirebase.getStorageReference();
         DatabaseReference databaseReference = ConfiguracaoFirebase.getFirebase();
 
@@ -164,7 +178,7 @@ public class Objeto implements Serializable {
         Log.w("SAVE", String.valueOf(bitmaps.size()));
 
         if( bitmaps != null && bitmaps.size() > 0 ) {
-            for ( Bitmap bitmap : bitmaps ) {
+            for ( final Bitmap bitmap : bitmaps ) {
                 String name = String.valueOf(bitmap.hashCode()) + ".png";
                 Log.w("IMAGE", name);
 
@@ -185,5 +199,34 @@ public class Objeto implements Serializable {
 
             }
         }
+    }
+
+    public static List<Objeto> loadObjects() {
+        if( !isListenerAdded ) {
+            isListenerAdded = true;
+            final DatabaseReference databaseReference = ConfiguracaoFirebase.getFirebase();
+
+            Query query = databaseReference.child(REFERENCE_OBJECT).orderByValue();
+            query.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                if( dataSnapshot.exists() ) {
+                    for (DataSnapshot data : dataSnapshot.getChildren()) {
+                        Objeto objeto = data.getValue(Objeto.class);
+                        Log.w("OBJ", objeto.toString());
+                        objetos.put(objeto.getId(), objeto);
+                    }
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+            }
+        });
+
+        }
+
+        return new ArrayList<>(objetos.values());
     }
 }
