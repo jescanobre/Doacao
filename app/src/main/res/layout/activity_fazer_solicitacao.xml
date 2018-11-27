@@ -20,7 +20,7 @@
             android:textSize="20sp" />
 
         <EditText
-            android:id="@+id/editText"
+            android:id="@+id/txtMensagem"
             android:layout_width="match_parent"
             android:layout_height="299dp"
             android:layout_marginLeft="15dp"

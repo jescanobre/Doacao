@@ -18,7 +18,7 @@
             app:srcCompat="@drawable/download" />
 
         <TextView
-            android:id="@+id/textView4"
+            android:id="@+id/txtTitulo"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:gravity="center_horizontal"
@@ -41,7 +41,7 @@
                 android:textStyle="bold" />
 
             <TextView
-                android:id="@+id/textView6"
+                android:id="@+id/txtDescricao"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="@string/objDescricao" />

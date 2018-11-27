@@ -19,12 +19,14 @@ import com.google.firebase.auth.FirebaseAuthUserCollisionException;
 import com.google.firebase.auth.FirebaseAuthWeakPasswordException;
 import com.google.firebase.auth.FirebaseUser;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
 import dsdm.ufc.doacao.DAO.ConfiguracaoFirebase;
 import dsdm.ufc.doacao.Helper.Base64Custom;
 import dsdm.ufc.doacao.Helper.Preferencias;
+import dsdm.ufc.doacao.entidades.Objeto;
 import dsdm.ufc.doacao.entidades.Usuarios;
 
 public class cadastro extends AppCompatActivity {
@@ -53,10 +55,14 @@ public class cadastro extends AppCompatActivity {
             public void onClick(View v) {
                 if (senha1.getText().toString().equals(senha2.getText().toString())) {
 
+                    ArrayList<Objeto> lista = new ArrayList<>();
+
+
                     usuarios = new Usuarios();
                     usuarios.setNome(nome.getText().toString());
                     usuarios.setEmail(email.getText().toString());
                     usuarios.setSenha(senha1.getText().toString());
+                    usuarios.setMeusObjs(lista);
 
                     cadastrarUsuario();
 

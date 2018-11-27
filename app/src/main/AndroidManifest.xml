@@ -4,7 +4,10 @@
 
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
-    <uses-feature android:name="android.hardware.camera" android:required="true" />
+
+    <uses-feature
+        android:name="android.hardware.camera"
+        android:required="true" />
 
     <application
         android:allowBackup="true"
@@ -34,7 +37,8 @@
         <activity android:name=".fragments.donate.TitleDonate" />
         <activity android:name=".fragments.donate.DescriptionDonate" />
         <activity android:name=".fragments.donate.StatusDonate" />
-        <activity android:name=".fragments.donate.RevisionDonate"></activity>
+        <activity android:name=".fragments.donate.RevisionDonate" />
+        <activity android:name=".opcoes"></activity>
     </application>
 
 </manifest>

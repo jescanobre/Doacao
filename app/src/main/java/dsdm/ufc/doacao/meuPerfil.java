@@ -7,9 +7,11 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
+import android.widget.TextView;
 
 import java.util.ArrayList;
 
+import dsdm.ufc.doacao.entidades.Usuarios;
 import dsdm.ufc.doacao.managers.SessionManager;
 
 public class meuPerfil extends AppCompatActivity {
@@ -24,24 +26,20 @@ public class meuPerfil extends AppCompatActivity {
 
         sessionManager = new SessionManager(getApplicationContext());
 
-        objLista = (ListView) findViewById(R.id.objetosLista);
+        TextView txtNome = (TextView) findViewById(R.id.txtNome);
+        TextView txtEmail = (TextView) findViewById(R.id.txtEmail);
+
+
 
         final String lista[] = new String[]{"Cadeira de Balanço","Bicicleta"};
 
+        sessionManager = new SessionManager(this);
+        Usuarios usuarioDados = sessionManager.getUser();
+        System.out.println("aaaaaaaaaaaaaaaa " + usuarioDados.getNome());
+        txtNome.setText(usuarioDados.getNome());
+        txtEmail.setText(usuarioDados.getEmail());
 
-        ArrayAdapter arrayAdapter = new ArrayAdapter(this,android.R.layout.simple_list_item_1,lista);
-        objLista.setAdapter(arrayAdapter);
 
-        objLista.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                if(lista[position].equals("Cadeira de Balanço")){
-                    Intent i = new Intent(meuPerfil.this,meuObj.class);
-
-                    startActivity(i);
-                }
-            }
-        });
     }
 
 
