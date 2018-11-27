@@ -19,6 +19,16 @@
 
         </SearchView>
 
+        <TextView
+            android:id="@+id/txtResult"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:gravity="center_horizontal"
+            android:padding="30dp"
+            android:text="Nenhum Objeto Encontrado!"
+            android:textSize="18sp" />
+
     </LinearLayout>
 
 </FrameLayout>
