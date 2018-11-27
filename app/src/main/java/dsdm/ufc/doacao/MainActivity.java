@@ -41,8 +41,8 @@ public class MainActivity extends AppCompatActivity {
                                 selectedFragment = Donate.newInstance();
                                 break;
                             case R.id.navigation_perfil:
-                                selectedFragment = User.newInstance();
-                                break;
+                                selectedFragment = Opcoes.newInstance();
+
                         }
 
                         FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();

@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".opcoes">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        tools:layout_editor_absoluteX="8dp"
+        tools:layout_editor_absoluteY="8dp">
+
+        <TextView
+            android:id="@+id/meuPerfil"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center_vertical|center_horizontal"
+            android:padding="30dp"
+            android:text="Meu Perfilg"
+            android:textSize="18sp" />
+
+        <TextView
+            android:id="@+id/meusObjetos"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center_vertical|center_horizontal"
+            android:padding="30dp"
+            android:text="Meus Objetos"
+            android:textSize="18sp" />
+
+        <TextView
+            android:id="@+id/objRecebidos"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center_vertical|center_horizontal"
+            android:padding="30dp"
+            android:text="Objetos Recebidos"
+            android:textSize="18sp" />
+
+        <TextView
+            android:id="@+id/sair"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="bottom|center_horizontal"
+            android:padding="30dp"
+            android:text="Sair"
+            android:textSize="18sp" />
+    </LinearLayout>
+
+
+</android.support.constraint.ConstraintLayout>

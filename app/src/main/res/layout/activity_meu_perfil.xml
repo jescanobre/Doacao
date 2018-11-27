@@ -40,7 +40,7 @@
 
 
             <TextView
-                android:id="@+id/textView9"
+                android:id="@+id/txtNome"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="@string/meuNome"
@@ -53,18 +53,18 @@
                 android:orientation="horizontal" />
 
             <TextView
-                android:id="@+id/textView12"
+                android:id="@+id/textView11"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="15dp"
                 android:text="Email:"
                 android:textSize="15sp" />
 
             <TextView
-                android:id="@+id/textView11"
+                android:id="@+id/txtEmail"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="@string/meuEmail"
+                android:layout_marginTop="15dp"
+                android:text="Email:"
                 android:textSize="15sp" />
 
             <android.support.constraint.Guideline
@@ -72,21 +72,6 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="vertical" />
-
-            <TextView
-                android:id="@+id/textView10"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="15dp"
-                android:text="Meus objetos:"
-                android:textSize="15sp" />
-
-            <ListView
-                android:id="@+id/objetosLista"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent" >
-
-            </ListView>
 
         </LinearLayout>
     </LinearLayout>

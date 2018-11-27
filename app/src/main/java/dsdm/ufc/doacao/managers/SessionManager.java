@@ -27,6 +27,7 @@ public class SessionManager {
         editor.putString(Usuarios.KEY_NAME,  usuario.getNome());
         editor.putString(Usuarios.KEY_EMAIL, usuario.getEmail());
         editor.putString(Usuarios.KEY_SENHA, usuario.getSenha());
+
         editor.commit();
     }
 

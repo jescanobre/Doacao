@@ -7,6 +7,7 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.SearchView;
 
 import dsdm.ufc.doacao.R;
 
@@ -24,6 +25,9 @@ public class Search extends Fragment {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
     }
+
+    SearchView srcView = (SearchView) view.findViewById(R.id.srcView);
+
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
