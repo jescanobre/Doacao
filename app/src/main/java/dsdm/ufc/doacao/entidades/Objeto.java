@@ -42,9 +42,6 @@ public class Objeto implements Serializable {
     List<String> solitações;
 
     @Exclude
-    public static Map<String, Objeto> objetos = new ArrayMap<String, Objeto>();
-
-    @Exclude
     public static final String REFERENCE_OBJECT = "objeto";
     @Exclude
     public static final String REFERENCE_IMAGE  = "imagens";
@@ -199,34 +196,5 @@ public class Objeto implements Serializable {
 
             }
         }
-    }
-
-    public static List<Objeto> loadObjects() {
-        if( !isListenerAdded ) {
-            isListenerAdded = true;
-            final DatabaseReference databaseReference = ConfiguracaoFirebase.getFirebase();
-
-            Query query = databaseReference.child(REFERENCE_OBJECT).orderByValue();
-            query.addListenerForSingleValueEvent(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                if( dataSnapshot.exists() ) {
-                    for (DataSnapshot data : dataSnapshot.getChildren()) {
-                        Objeto objeto = data.getValue(Objeto.class);
-                        Log.w("OBJ", objeto.toString());
-                        objetos.put(objeto.getId(), objeto);
-                    }
-                }
-            }
-
-            @Override
-            public void onCancelled(@NonNull DatabaseError databaseError) {
-
-            }
-        });
-
-        }
-
-        return new ArrayList<>(objetos.values());
     }
 }

@@ -38,7 +38,10 @@
         <activity android:name=".fragments.donate.DescriptionDonate" />
         <activity android:name=".fragments.donate.StatusDonate" />
         <activity android:name=".fragments.donate.RevisionDonate" />
-        <activity android:name=".opcoes"></activity>
+
+        <service
+            android:name=".services.DownloadImageService"
+            android:exported="false"></service>
     </application>
 
 </manifest>
