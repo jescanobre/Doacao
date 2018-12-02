@@ -27,9 +27,9 @@
         <activity android:name=".cadastro" />
         <activity android:name=".MainActivity" />
         <activity android:name=".ObjetoDetalhe" />
+        <activity android:name=".MeuObjetoDetalhe" />
         <activity android:name=".PerfilGeral" />
         <activity android:name=".meuPerfil" />
-        <activity android:name=".meuObj" />
         <activity android:name=".minhasSolicitacoes" />
         <activity android:name=".solicitacaoDetalhe" />
         <activity android:name=".meusObj" />

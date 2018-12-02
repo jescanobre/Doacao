@@ -12,10 +12,10 @@ import android.widget.Button;
 import android.widget.ListView;
 import android.widget.TextView;
 
+import dsdm.ufc.doacao.MeuObjetoDetalhe;
 import dsdm.ufc.doacao.R;
 import dsdm.ufc.doacao.entidades.Usuarios;
 import dsdm.ufc.doacao.managers.SessionManager;
-import dsdm.ufc.doacao.meuObj;
 
 public class User extends Fragment {
 
@@ -55,7 +55,7 @@ public class User extends Fragment {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 if(lista[position].equals("Cadeira de Balanço")){
-                    Intent i = new Intent(getActivity(),meuObj.class);
+                    Intent i = new Intent(getActivity(),MeuObjetoDetalhe.class);
 
                     startActivity(i);
                 }

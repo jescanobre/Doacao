@@ -35,7 +35,7 @@ public class solicitacaoDetalhe extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Toast.makeText(solicitacaoDetalhe.this, "Solicitação Aceita!", Toast.LENGTH_SHORT).show();
-                Intent i = new Intent(solicitacaoDetalhe.this,meuObj.class);
+                Intent i = new Intent(solicitacaoDetalhe.this,MeuObjetoDetalhe.class);
                 startActivity(i);
 
             }
@@ -45,7 +45,7 @@ public class solicitacaoDetalhe extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Toast.makeText(solicitacaoDetalhe.this, "Solicitação Recusada!", Toast.LENGTH_SHORT).show();
-                Intent i = new Intent(solicitacaoDetalhe.this,meuObj.class);
+                Intent i = new Intent(solicitacaoDetalhe.this,MeuObjetoDetalhe.class);
                 startActivity(i);
 
             }

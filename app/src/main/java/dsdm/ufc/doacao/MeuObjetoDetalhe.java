@@ -1,17 +1,15 @@
 package dsdm.ufc.doacao;
 
 import android.content.Intent;
-import android.media.Image;
 import android.net.Uri;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.GridLayout;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.database.DataSnapshot;
@@ -22,8 +20,6 @@ import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
 import com.google.firebase.storage.StorageReference;
 
-import org.w3c.dom.Text;
-
 import java.util.List;
 
 import dsdm.ufc.doacao.DAO.ConfiguracaoFirebase;
@@ -31,10 +27,10 @@ import dsdm.ufc.doacao.entidades.Objeto;
 import dsdm.ufc.doacao.entidades.Usuarios;
 import dsdm.ufc.doacao.managers.GlideApp;
 
-public class ObjetoDetalhe extends AppCompatActivity {
+public class MeuObjetoDetalhe extends AppCompatActivity {
 
 
-    Button euQuero;
+    Button solicitacoes;
     TextView usuarioNome;
     GridLayout gridLayout;
 
@@ -43,7 +39,7 @@ public class ObjetoDetalhe extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_objeto_detalhe);
+        setContentView(R.layout.activity_meu_objeto_detalhe);
 
         gridLayout = findViewById(R.id.grid_layout_images);
 
@@ -86,13 +82,13 @@ public class ObjetoDetalhe extends AppCompatActivity {
             }
         });
 
-        euQuero = (Button)findViewById(R.id.euQuero);
+        solicitacoes = (Button)findViewById(R.id.minhasSolicitacoes);
 
-        euQuero.setOnClickListener(new View.OnClickListener() {
+        solicitacoes.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent i = new Intent(ObjetoDetalhe.this,fazerSolicitacao.class);
-                startActivity(i);
+                //Intent i = new Intent(MeuObjetoDetalhe.this,fazerSolicitacao.class);
+                //startActivity(i);
             }
         });
 
@@ -140,7 +136,7 @@ public class ObjetoDetalhe extends AppCompatActivity {
                     usuarioNome.setOnClickListener(new View.OnClickListener() {
                         @Override
                         public void onClick(View v) {
-                            Intent i = new Intent(ObjetoDetalhe.this,PerfilGeral.class);
+                            Intent i = new Intent(MeuObjetoDetalhe.this,PerfilGeral.class);
                             i.putExtra("id",models.getId());
                             startActivity(i);
                         }

@@ -5,6 +5,7 @@ import com.google.firebase.database.Exclude;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import dsdm.ufc.doacao.DAO.ConfiguracaoFirebase;
@@ -15,22 +16,22 @@ public class Usuarios {
     String nome;
     String email;
     String senha;
-    ArrayList<Objeto> meusObjs;
-    ArrayList<Objeto> recebidos;
+    List<Objeto> meusObjs;
+    List<Objeto> recebidos;
 
-    public ArrayList<Objeto> getRecebidos() {
+    public List<Objeto> getRecebidos() {
         return recebidos;
     }
 
-    public void setRecebidos(ArrayList<Objeto> recebidos) {
+    public void setRecebidos(List<Objeto> recebidos) {
         this.recebidos = recebidos;
     }
 
-    public ArrayList<Objeto> getMeusObjs() {
+    public List<Objeto> getMeusObjs() {
         return meusObjs;
     }
 
-    public void setMeusObjs(ArrayList<Objeto> meusObjs) {
+    public void setMeusObjs(List<Objeto> meusObjs) {
         this.meusObjs = meusObjs;
     }
 

@@ -48,7 +48,7 @@ public class Search extends Fragment {
             SearchView srcView = (SearchView) view.findViewById(R.id.srcView);
             final TextView txtResult = (TextView) view.findViewById(R.id.txtResult);
 
-            if(srcView!=null){
+            if(srcView!=null) {
                 final CharSequence query = srcView.getQuery();
 
                 System.out.println("aaaaaaaaaaaaaaaaaaa   " + query);
@@ -61,21 +61,26 @@ public class Search extends Fragment {
 
                         DatabaseReference mDatabaseRef = FirebaseDatabase.getInstance().getReference("objeto");
 
-                        Query query1=mDatabaseRef.orderByChild("titulo").equalTo(query.toString());
+                        Query query1 = mDatabaseRef.orderByChild("titulo").equalTo(query.toString());
 
                         query1.addValueEventListener(new ValueEventListener() {
                             @Override
                             public void onDataChange(DataSnapshot dataSnapshot) {
 
-                                for (DataSnapshot data:dataSnapshot.getChildren()){
+                                for (DataSnapshot data : dataSnapshot.getChildren()) {
 
 
-                                   Objeto models=data.getValue(Objeto.class);
-                                    String nome=models.getTitulo();
+                                    Objeto models = data.getValue(Objeto.class);
+                                    String nome = models.getTitulo();
                                     System.out.println("aaaaaaaaaaaaaaaaaaa   2" + nome);
                                     txtResult.setText(nome);
-
-
+                                    final String id = models.getId();
+                                    txtResult.setOnClickListener(new View.OnClickListener() {
+                                        @Override
+                                        public void onClick(View v) {
+                                            abrirObjDetalhe(id);
+                                        }
+                                    });
                                 }
 
                             }
@@ -85,16 +90,6 @@ public class Search extends Fragment {
                                 txtResult.setText("Nenhum Objeto Encontrado!");
                             }
                         });
-                        if(txtResult.getText().toString()!="Nenhum Objeto Encontrado!"){
-                            txtResult.setOnClickListener(new View.OnClickListener() {
-                                @Override
-                                public void onClick(View v) {
-                                    Intent i = new Intent(getActivity(), ObjetoDetalhe.class);
-                                    i.putExtra("nome",txtResult.getText().toString());
-                                    startActivity(i);
-                                }
-                            });
-                        }
                     }
                 });
             }
@@ -102,6 +97,11 @@ public class Search extends Fragment {
         return view;
 
         }
+    public void abrirObjDetalhe (String id){
+        Intent intent = new Intent(getActivity(), ObjetoDetalhe.class);
+        intent.putExtra(ObjetoDetalhe.EXTRA_ID, id);
+        startActivity(intent);
+    }
 
 
     }
