@@ -1,11 +1,12 @@
 package dsdm.ufc.doacao;
 
 import android.content.Intent;
-import android.media.Image;
 import android.net.Uri;
+import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.GridLayout;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
@@ -22,14 +23,14 @@ import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
 import com.google.firebase.storage.StorageReference;
 
-import org.w3c.dom.Text;
-
 import java.util.List;
 
 import dsdm.ufc.doacao.DAO.ConfiguracaoFirebase;
 import dsdm.ufc.doacao.entidades.Objeto;
+import dsdm.ufc.doacao.entidades.Solicitacao;
 import dsdm.ufc.doacao.entidades.Usuarios;
 import dsdm.ufc.doacao.managers.GlideApp;
+import dsdm.ufc.doacao.managers.SessionManager;
 
 public class ObjetoDetalhe extends AppCompatActivity {
 
@@ -47,11 +48,12 @@ public class ObjetoDetalhe extends AppCompatActivity {
 
         gridLayout = findViewById(R.id.grid_layout_images);
 
-        DatabaseReference mDatabaseRef = FirebaseDatabase.getInstance().getReference("objeto");
+        DatabaseReference mDatabaseRef = FirebaseDatabase.getInstance().getReference(Objeto.REFERENCE_OBJECT);
+        DatabaseReference solicitacaoRef = FirebaseDatabase.getInstance().getReference(Solicitacao.REFERENCE_SOLICITACAO);
 
 
         Intent intent = getIntent();
-        String id = intent.getExtras().getString(EXTRA_ID);
+        final String id = intent.getExtras().getString(EXTRA_ID);
 
         Query query1=mDatabaseRef.orderByChild("id").equalTo(id);
 
@@ -85,13 +87,35 @@ public class ObjetoDetalhe extends AppCompatActivity {
             }
         });
 
+        Log.w("SOLICITACAO", id);
+        solicitacaoRef.orderByChild("idObjeto").equalTo(id).addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                SessionManager session = new SessionManager(getApplicationContext());
+                for (DataSnapshot data : dataSnapshot.getChildren()) {
+                    Solicitacao solicitacao = data.getValue(Solicitacao.class);
+                    Log.w("solicitacao", solicitacao.toString());
+                    if(solicitacao.getIdUsuario().equals(session.getUser().getId())) {
+                        euQuero.setClickable(false);
+                        euQuero.setEnabled(false);
+                    }
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+            }
+        });
+
         euQuero = (Button)findViewById(R.id.euQuero);
 
         euQuero.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent i = new Intent(ObjetoDetalhe.this,fazerSolicitacao.class);
-                startActivity(i);
+                Intent intent = new Intent(ObjetoDetalhe.this,FazerSolicitacao.class);
+                intent.putExtra(FazerSolicitacao.EXTRA_ID_OBJETO, id);
+                startActivity(intent);
             }
         });
 

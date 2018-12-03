@@ -21,8 +21,6 @@ import java.util.List;
 import java.util.Map;
 import java.util.Objects;
 import com.google.firebase.database.Exclude;
-import com.google.firebase.database.Query;
-import com.google.firebase.database.ValueEventListener;
 import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
 
@@ -167,8 +165,7 @@ public class Objeto implements Serializable {
         final DatabaseReference objectRef = databaseReference.child(REFERENCE_OBJECT);
         final StorageReference imageRef  = referenciaFirebase.child(REFERENCE_IMAGE);
 
-        id = String.valueOf(hashCode());
-
+        id = objectRef.push().getKey();
         objectRef.child(id).setValue(this);
         objectRef.child(id).child(REFERENCE_IMAGE).setValue(imagens);
 

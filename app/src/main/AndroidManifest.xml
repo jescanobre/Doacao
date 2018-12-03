@@ -33,14 +33,14 @@
         <activity android:name=".minhasSolicitacoes" />
         <activity android:name=".solicitacaoDetalhe" />
         <activity android:name=".meusObj" />
-        <activity android:name=".fazerSolicitacao" />
+        <activity android:name=".FazerSolicitacao" />
         <activity android:name=".fragments.donate.TitleDonate" />
         <activity android:name=".fragments.donate.DescriptionDonate" />
         <activity android:name=".fragments.donate.StatusDonate" />
         <activity android:name=".fragments.donate.RevisionDonate" />
 
         <service
-            android:name=".services.DownloadImageService"
+            android:name=".services.SaveSolicitacaoService"
             android:exported="false"></service>
     </application>
 

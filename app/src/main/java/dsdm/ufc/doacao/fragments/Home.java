@@ -6,19 +6,14 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v4.app.Fragment;
-import android.support.v7.widget.CardView;
 import android.support.v7.widget.GridLayout;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
-import android.widget.Space;
 import android.widget.TextView;
 
-import com.bumptech.glide.Glide;
-import com.bumptech.glide.request.RequestOptions;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -26,16 +21,12 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.ValueEventListener;
 import com.google.firebase.storage.StorageReference;
 
-import java.util.List;
-import java.util.Map;
-
 import dsdm.ufc.doacao.DAO.ConfiguracaoFirebase;
 import dsdm.ufc.doacao.ObjetoDetalhe;
 import dsdm.ufc.doacao.R;
 import dsdm.ufc.doacao.entidades.Objeto;
 import dsdm.ufc.doacao.managers.GlideApp;
 import dsdm.ufc.doacao.managers.SessionManager;
-import dsdm.ufc.doacao.services.DownloadImageService;
 
 
 public class Home extends Fragment {
