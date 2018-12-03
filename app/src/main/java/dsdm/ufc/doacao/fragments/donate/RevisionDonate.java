@@ -72,6 +72,7 @@ public class RevisionDonate extends AppCompatActivity {
                         objeto.setIdDoador(session.getUser().getId());
 
                         objeto.salvar(getApplicationContext(), Donate.getImages() );
+
                         Intent intent = new Intent(RevisionDonate.this, MainActivity.class);
                         startActivity(intent);
                         finish();
