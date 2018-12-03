@@ -47,7 +47,7 @@ public class MeuObjetoDetalhe extends AppCompatActivity {
 
 
         Intent intent = getIntent();
-        String id = intent.getExtras().getString(EXTRA_ID);
+        final String id = intent.getExtras().getString(EXTRA_ID);
 
         Query query1=mDatabaseRef.orderByChild("id").equalTo(id);
 
@@ -87,8 +87,9 @@ public class MeuObjetoDetalhe extends AppCompatActivity {
         solicitacoes.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                //Intent i = new Intent(MeuObjetoDetalhe.this,fazerSolicitacao.class);
-                //startActivity(i);
+                Intent i = new Intent(MeuObjetoDetalhe.this,minhasSolicitacoes.class);
+                i.putExtra(ObjetoDetalhe.EXTRA_ID, id);
+                startActivity(i);
             }
         });
 
