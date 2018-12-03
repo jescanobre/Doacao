@@ -2,17 +2,14 @@ package dsdm.ufc.doacao;
 
 import android.content.Intent;
 import android.net.Uri;
-import android.support.annotation.NonNull;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.GridLayout;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.database.DataSnapshot;
@@ -27,15 +24,13 @@ import java.util.List;
 
 import dsdm.ufc.doacao.DAO.ConfiguracaoFirebase;
 import dsdm.ufc.doacao.entidades.Objeto;
-import dsdm.ufc.doacao.entidades.Solicitacao;
 import dsdm.ufc.doacao.entidades.Usuarios;
 import dsdm.ufc.doacao.managers.GlideApp;
-import dsdm.ufc.doacao.managers.SessionManager;
 
-public class ObjetoDetalhe extends AppCompatActivity {
+public class MeuObjetoDetalhe extends AppCompatActivity {
 
 
-    Button euQuero;
+    Button solicitacoes;
     TextView usuarioNome;
     GridLayout gridLayout;
 
@@ -44,12 +39,11 @@ public class ObjetoDetalhe extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_objeto_detalhe);
+        setContentView(R.layout.activity_meu_objeto_detalhe);
 
         gridLayout = findViewById(R.id.grid_layout_images);
 
-        DatabaseReference mDatabaseRef = FirebaseDatabase.getInstance().getReference(Objeto.REFERENCE_OBJECT);
-        DatabaseReference solicitacaoRef = FirebaseDatabase.getInstance().getReference(Solicitacao.REFERENCE_SOLICITACAO);
+        DatabaseReference mDatabaseRef = FirebaseDatabase.getInstance().getReference("objeto");
 
 
         Intent intent = getIntent();
@@ -88,35 +82,14 @@ public class ObjetoDetalhe extends AppCompatActivity {
             }
         });
 
-        Log.w("SOLICITACAO", id);
-        solicitacaoRef.orderByChild("idObjeto").equalTo(id).addListenerForSingleValueEvent(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                SessionManager session = new SessionManager(getApplicationContext());
-                for (DataSnapshot data : dataSnapshot.getChildren()) {
-                    Solicitacao solicitacao = data.getValue(Solicitacao.class);
-                    Log.w("solicitacao", solicitacao.toString());
-                    if(solicitacao.getIdUsuario().equals(session.getUser().getId())) {
-                        euQuero.setClickable(false);
-                        euQuero.setEnabled(false);
-                    }
-                }
-            }
+        solicitacoes = (Button)findViewById(R.id.minhasSolicitacoes);
 
-            @Override
-            public void onCancelled(@NonNull DatabaseError databaseError) {
-
-            }
-        });
-
-        euQuero = (Button)findViewById(R.id.euQuero);
-
-        euQuero.setOnClickListener(new View.OnClickListener() {
+        solicitacoes.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(ObjetoDetalhe.this,FazerSolicitacao.class);
-                intent.putExtra(FazerSolicitacao.EXTRA_ID_OBJETO, id);
-                startActivity(intent);
+                Intent i = new Intent(MeuObjetoDetalhe.this,minhasSolicitacoes.class);
+                i.putExtra(ObjetoDetalhe.EXTRA_ID, id);
+                startActivity(i);
             }
         });
 
@@ -164,7 +137,7 @@ public class ObjetoDetalhe extends AppCompatActivity {
                     usuarioNome.setOnClickListener(new View.OnClickListener() {
                         @Override
                         public void onClick(View v) {
-                            Intent i = new Intent(ObjetoDetalhe.this,PerfilGeral.class);
+                            Intent i = new Intent(MeuObjetoDetalhe.this,PerfilGeral.class);
                             i.putExtra("id",models.getId());
                             startActivity(i);
                         }

@@ -7,32 +7,90 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
+import android.widget.Toast;
+
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.Query;
+import com.google.firebase.database.ValueEventListener;
+
+import java.util.ArrayList;
+import java.util.List;
+
+import dsdm.ufc.doacao.entidades.Objeto;
+import dsdm.ufc.doacao.entidades.Solicitacao;
+import dsdm.ufc.doacao.entidades.Usuarios;
 
 public class minhasSolicitacoes extends AppCompatActivity {
 
     ListView sLista;
     minhasSolicitacoes mContext;
+    public static final String EXTRA_ID = "id";
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_minhas_solicitacoes);
-        mContext = this;
-        sLista = (ListView)findViewById(R.id.sLista);
 
-        final String soli[] = new String[]{"Ricardo"};
 
-        ArrayAdapter arrayAdapter = new ArrayAdapter(this,android.R.layout.simple_list_item_1,soli);
-        sLista.setAdapter(arrayAdapter);
+        sLista = (ListView) findViewById(R.id.sLista);
 
-        sLista.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+        Intent intent = getIntent();
+        final String id = intent.getExtras().getString(EXTRA_ID);
+
+        final List<String> lista = new ArrayList<String>();                       //declara lista
+
+
+        DatabaseReference mDatabaseRef = FirebaseDatabase.getInstance().getReference("solicitacao");
+        Query query1=mDatabaseRef.orderByChild("idObjeto").equalTo(id);
+
+        query1.addValueEventListener(new ValueEventListener() {
             @Override
-            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                if(soli[position].equals("Ricardo")){
-                    Intent i = new Intent(mContext,solicitacaoDetalhe.class);
+            public void onDataChange(DataSnapshot dataSnapshot) {
 
-                    startActivity(i);
+                for (DataSnapshot data:dataSnapshot.getChildren()){
+
+                    final Solicitacao models=data.getValue(Solicitacao.class);
+                    String userId=models.getIdUsuario();
+
+                    //----------------------------------------------------------------------------------
+
+                    DatabaseReference mDatabaseRef2 = FirebaseDatabase.getInstance().getReference("usuario");
+                    Query query2=mDatabaseRef2.orderByChild("id").equalTo(userId);
+
+                    query2.addValueEventListener(new ValueEventListener() {
+                        @Override
+                        public void onDataChange(DataSnapshot dataSnapshot) {
+
+                            for (DataSnapshot data:dataSnapshot.getChildren()){
+
+                                final Usuarios models=data.getValue(Usuarios.class);
+                                String nome=models.getNome();
+                                lista.add(nome);
+
+                            }
+
+                        }
+
+                        @Override
+                        public void onCancelled(DatabaseError databaseError) {
+
+                        }
+                    });
+
+                    //--------------------------------------------------------------------------------
                 }
+
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+
             }
         });
+
+
     }
 }
