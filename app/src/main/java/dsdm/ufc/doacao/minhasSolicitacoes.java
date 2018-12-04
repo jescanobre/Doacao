@@ -54,6 +54,8 @@ public class minhasSolicitacoes extends AppCompatActivity {
 
                     final Solicitacao models=data.getValue(Solicitacao.class);
                     String userId=models.getIdUsuario();
+                    final String objId = models.getIdObjeto();
+                    System.out.println("id usuario da sugestao : " + userId);
 
                     //----------------------------------------------------------------------------------
 
@@ -68,8 +70,27 @@ public class minhasSolicitacoes extends AppCompatActivity {
 
                                 final Usuarios models=data.getValue(Usuarios.class);
                                 String nome=models.getNome();
+                                System.out.println("NOME DELE ============ : " + nome);
                                 lista.add(nome);
+                                final ArrayAdapter arrayAdapter = new ArrayAdapter(minhasSolicitacoes.this,android.R.layout.simple_list_item_1,lista); //add lista no adapter
+                                sLista.setAdapter(arrayAdapter);
+                                sLista.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+                                    @Override
+                                    public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                                        String string=arrayAdapter.getItem(position).toString();
+                                        Toast.makeText(minhasSolicitacoes.this, string, Toast.LENGTH_SHORT).show();
+                                        System.out.println("objid ============ : " + objId);
+                                        Intent intent = new Intent(minhasSolicitacoes.this, solicitacaoDetalhe.class);
+                                        Bundle extras = new Bundle();
+                                        extras.putString("USER_ID", string);
+                                        System.out.println("USER+NOME ANTES DE MANDAR ============ : " + string);
+                                        extras.putString("OBJ_ID", objId);
+                                        intent.putExtras(extras);
+                                        startActivity(intent);
+                                        finish();
 
+                                    }
+                                });
                             }
 
                         }
@@ -93,4 +114,6 @@ public class minhasSolicitacoes extends AppCompatActivity {
 
 
     }
+
+
 }

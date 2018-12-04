@@ -18,10 +18,12 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
 
+import dsdm.ufc.doacao.MeuObjetoDetalhe;
 import dsdm.ufc.doacao.ObjetoDetalhe;
 import dsdm.ufc.doacao.R;
 import dsdm.ufc.doacao.entidades.Objeto;
 import dsdm.ufc.doacao.entidades.Usuarios;
+import dsdm.ufc.doacao.managers.SessionManager;
 import dsdm.ufc.doacao.meuPerfil;
 
 public class Search extends Fragment {
@@ -70,7 +72,7 @@ public class Search extends Fragment {
                                 for (DataSnapshot data : dataSnapshot.getChildren()) {
 
 
-                                    Objeto models = data.getValue(Objeto.class);
+                                    final Objeto models = data.getValue(Objeto.class);
                                     String nome = models.getTitulo();
                                     System.out.println("aaaaaaaaaaaaaaaaaaa   2" + nome);
                                     txtResult.setText(nome);
@@ -78,7 +80,15 @@ public class Search extends Fragment {
                                     txtResult.setOnClickListener(new View.OnClickListener() {
                                         @Override
                                         public void onClick(View v) {
-                                            abrirObjDetalhe(id);
+                                            SessionManager sessionManager;
+                                            sessionManager = new SessionManager(getContext());
+                                            sessionManager = new SessionManager(getContext());
+                                            final Usuarios usuarioDados = sessionManager.getUser();
+                                            Boolean meuOuNao = false;
+                                            if(models.getIdDoador().equals(usuarioDados.getId())){
+                                                meuOuNao = true;
+                                            }
+                                            abrirObjDetalhe(id, meuOuNao);
                                         }
                                     });
                                 }
@@ -97,10 +107,18 @@ public class Search extends Fragment {
         return view;
 
         }
-    public void abrirObjDetalhe (String id){
-        Intent intent = new Intent(getActivity(), ObjetoDetalhe.class);
-        intent.putExtra(ObjetoDetalhe.EXTRA_ID, id);
-        startActivity(intent);
+    public void abrirObjDetalhe (String id, boolean meuOuNao){
+        if(meuOuNao==false){
+            Intent intent = new Intent(getActivity(), ObjetoDetalhe.class);
+            intent.putExtra(ObjetoDetalhe.EXTRA_ID, id);
+            startActivity(intent);
+        }
+        if(meuOuNao==true){
+            Intent intent = new Intent(getActivity(), MeuObjetoDetalhe.class);
+            intent.putExtra(ObjetoDetalhe.EXTRA_ID, id);
+            startActivity(intent);
+        }
+
     }
 
 

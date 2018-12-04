@@ -60,7 +60,8 @@ public class ObjetoDetalhe extends AppCompatActivity {
 
         final TextView txtTitulo = (TextView) findViewById(R.id.txtTitulo);
         final TextView txtDescricao = (TextView) findViewById(R.id.txtDescricao);
-
+        final TextView txtEstado = (TextView)findViewById(R.id.txtEstado);
+        euQuero = (Button)findViewById(R.id.euQuero);
 
         query1.addValueEventListener(new ValueEventListener() {
             @Override
@@ -74,6 +75,11 @@ public class ObjetoDetalhe extends AppCompatActivity {
                     String descricao=models.getDescricao();
                     txtTitulo.setText(nome);
                     txtDescricao.setText(descricao);
+                    if(models.getEstado().equals(true)){
+                        txtEstado.setText("Doado");
+                        euQuero.setEnabled(false);
+
+                    }
                     procuraId(models.getIdDoador());
 
                     loadImages(models.getImagens());
@@ -109,7 +115,6 @@ public class ObjetoDetalhe extends AppCompatActivity {
             }
         });
 
-        euQuero = (Button)findViewById(R.id.euQuero);
 
         euQuero.setOnClickListener(new View.OnClickListener() {
             @Override

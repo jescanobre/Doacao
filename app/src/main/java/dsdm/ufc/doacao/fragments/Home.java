@@ -25,6 +25,7 @@ import dsdm.ufc.doacao.DAO.ConfiguracaoFirebase;
 import dsdm.ufc.doacao.ObjetoDetalhe;
 import dsdm.ufc.doacao.R;
 import dsdm.ufc.doacao.entidades.Objeto;
+import dsdm.ufc.doacao.entidades.Usuarios;
 import dsdm.ufc.doacao.managers.GlideApp;
 import dsdm.ufc.doacao.managers.SessionManager;
 
@@ -67,6 +68,11 @@ public class Home extends Fragment {
     }
 
     public void loadObjetos() {
+        SessionManager sessionManager;
+        sessionManager = new SessionManager(getContext());
+        sessionManager = new SessionManager(getContext());
+        final Usuarios usuarioDados = sessionManager.getUser();
+
 
         DatabaseReference reference = ConfiguracaoFirebase.getFirebase().child(Objeto.REFERENCE_OBJECT);
         reference.addListenerForSingleValueEvent(new ValueEventListener() {
@@ -74,7 +80,11 @@ public class Home extends Fragment {
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 for (DataSnapshot data : dataSnapshot.getChildren() ) {
                     Objeto objeto = data.getValue(Objeto.class);
-                    createCardView( objeto );
+                    if(objeto.getEstado().equals(true)||objeto.getIdDoador().equals(usuarioDados.getId())){
+                    }else{
+                        createCardView( objeto );
+
+                    }
                 }
             }
 

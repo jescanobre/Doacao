@@ -64,7 +64,7 @@ public class Opcoes extends Fragment {
             @Override
             public void onClick(View v) {
 
-                Intent i = new Intent(getActivity(), meuPerfil.class);
+                Intent i = new Intent(getActivity(), meusRecebidos.class);
                 startActivity(i);
             }
         });

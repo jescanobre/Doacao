@@ -18,6 +18,7 @@ import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import dsdm.ufc.doacao.entidades.Objeto;
 import dsdm.ufc.doacao.entidades.Usuarios;
@@ -60,7 +61,7 @@ public class PerfilGeral extends AppCompatActivity {
                     usuarioEmail.setText(models.getEmail());
                     objsDe.setText("Objetos de: " + nome);
 
-                    procuraObjs(models.getId(), arrayAdapter);
+                    procuraObjs(models.getId());
                 }
 
             }
@@ -91,26 +92,62 @@ public class PerfilGeral extends AppCompatActivity {
        // });
     }
 
-    public void procuraObjs(String id, final ArrayAdapter arrayAdapter){
+    public void procuraObjs(String id) {
         DatabaseReference mDatabaseRef = FirebaseDatabase.getInstance().getReference("objeto");
-        Query query1=mDatabaseRef.orderByChild("idDoador").equalTo(id);
+        Query query1 = mDatabaseRef.orderByChild("idDoador").equalTo(id);
+        final ListView listaObjs = (ListView) findViewById(R.id.listaObjs);
+
+        final List<String> lista = new ArrayList<String>();                       //declara lista
+
+        query1.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+
+                for (DataSnapshot data : dataSnapshot.getChildren()) {
+
+                    final Objeto models = data.getValue(Objeto.class);
+                    String nome = models.getTitulo();
+                    System.out.println("objeto detalhe nome : " + nome);
+                    lista.add(models.getTitulo());                            //add nome do obj na lista
+                    System.out.println("Lista ainda dentro da função : " + lista);
+                    final ArrayAdapter arrayAdapter = new ArrayAdapter(PerfilGeral.this, android.R.layout.simple_list_item_1, lista); //add lista no adapter
+                    listaObjs.setAdapter(arrayAdapter);
+                    listaObjs.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+                        @Override
+                        public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                            String string = arrayAdapter.getItem(position).toString();
+                            Toast.makeText(PerfilGeral.this, string, Toast.LENGTH_SHORT).show();
+                            acha(string);
+
+                        }
+                    });
+                }
+
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+
+            }
+        });
+    }
+    public void acha(String nome){
+        DatabaseReference mDatabaseRef = FirebaseDatabase.getInstance().getReference("objeto");
+
+        Query query1=mDatabaseRef.orderByChild("titulo").equalTo(nome);
         query1.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
 
                 for (DataSnapshot data:dataSnapshot.getChildren()){
 
-
                     final Objeto models=data.getValue(Objeto.class);
                     String nome=models.getTitulo();
-                    String descricao=models.getDescricao();
-                    ArrayList<String> lista = new ArrayList<>();
-                    lista.add(nome);
+                    System.out.println("objeto detalhe nome : " + nome);
+                    Intent intent = new Intent(PerfilGeral.this, MeuObjetoDetalhe.class);
+                    intent.putExtra(ObjetoDetalhe.EXTRA_ID, models.getId());
+                    startActivity(intent);
 
-                    objLista = (ListView) findViewById(R.id.objetosLista);
-
-
-                    objLista.setAdapter(arrayAdapter);
 
                 }
 
