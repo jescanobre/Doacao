@@ -75,7 +75,7 @@
                 android:textSize="15sp" />
 
             <ListView
-                android:id="@+id/objetosLista"
+                android:id="@+id/listaObjs"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent" />
         </LinearLayout>

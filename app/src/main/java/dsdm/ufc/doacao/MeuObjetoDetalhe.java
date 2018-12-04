@@ -54,6 +54,7 @@ public class MeuObjetoDetalhe extends AppCompatActivity {
 
         final TextView txtTitulo = (TextView) findViewById(R.id.txtTitulo);
         final TextView txtDescricao = (TextView) findViewById(R.id.txtDescricao);
+        final TextView txtEstado = (TextView) findViewById(R.id.txtEstado);
 
 
         query1.addValueEventListener(new ValueEventListener() {
@@ -71,6 +72,10 @@ public class MeuObjetoDetalhe extends AppCompatActivity {
                     procuraId(models.getIdDoador());
 
                     loadImages(models.getImagens());
+                    if(models.getEstado()==true){
+                        solicitacoes.setEnabled(false);
+                        txtEstado.setText("Doado");
+                    }
 
                 }
 

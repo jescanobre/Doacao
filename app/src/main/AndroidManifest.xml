@@ -33,6 +33,7 @@
         <activity android:name=".minhasSolicitacoes" />
         <activity android:name=".solicitacaoDetalhe" />
         <activity android:name=".meusObj" />
+        <activity android:name=".meusRecebidos" />
         <activity android:name=".FazerSolicitacao" />
         <activity android:name=".fragments.donate.TitleDonate" />
         <activity android:name=".fragments.donate.DescriptionDonate" />
