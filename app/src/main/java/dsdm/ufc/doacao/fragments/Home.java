@@ -34,9 +34,11 @@ public class Home extends Fragment {
 
     private SessionManager session;
     private View view;
+    private LinearLayout layouts[];
+    private static int index = 0;
 
     public Home() {
-
+        this.layouts = new LinearLayout[2];
     }
 
     public static Home newInstance() {
@@ -54,6 +56,9 @@ public class Home extends Fragment {
                              Bundle savedInstanceState) {
 
         view =  inflater.inflate(R.layout.fragment_home, container, false);
+
+        layouts[0] = view.findViewById(R.id.layout_left);
+        layouts[1] = view.findViewById(R.id.layout_right);
 
         session = new SessionManager(view.getContext());
 
@@ -114,12 +119,12 @@ public class Home extends Fragment {
 
                     GlideApp.with(view).load(uri.toString()).override(300, 300).into(imageView);
 
-                    GridLayout gridLayout = view.findViewById(R.id.home_grid_layout);
+//                    GridLayout gridLayout = view.findViewById(R.id.home_grid_layout);
 
-                    LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT);
-                    params.setMargins(10, 10, 10, 10);
-
-                    card.setLayoutParams(params);
+//                    LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT);
+//                    params.setMargins(10, 10, 10, 10);
+//
+//                    card.setLayoutParams(params);
 
                     card.setOnClickListener(new View.OnClickListener() {
                         @Override
@@ -128,7 +133,10 @@ public class Home extends Fragment {
                         }
                     });
 
-                    gridLayout.addView(card);
+//                    gridLayout.addView(card);
+
+                    index = (index+1)%2;
+                    layouts[index].addView(card);
                 }
             });
         }
