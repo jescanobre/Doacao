@@ -1,12 +1,20 @@
 package dsdm.ufc.doacao.entidades;
 
+import android.Manifest;
 import android.content.Context;
+import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
+import android.location.Location;
+import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
+import android.support.v4.app.ActivityCompat;
 import android.util.ArrayMap;
 import android.util.Log;
 
+import com.google.android.gms.common.ConnectionResult;
+import com.google.android.gms.common.api.GoogleApiClient;
+import com.google.android.gms.location.LocationServices;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.database.ChildEventListener;
 import com.google.firebase.database.DataSnapshot;
@@ -21,6 +29,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Objects;
 import com.google.firebase.database.Exclude;
+import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
 
@@ -33,11 +42,14 @@ public class Objeto implements Serializable {
     Boolean estado;
     Boolean ehUsado;
     List<String> imagens;
+    Double latitude;
+    Double longitude;
+
 
     String idDoador;
     String idReceptor;
-
     List<String> solitações;
+
 
     @Exclude
     public static final String REFERENCE_OBJECT = "objeto";
@@ -52,6 +64,22 @@ public class Objeto implements Serializable {
         imagens = new ArrayList<String>();
         solitações = new ArrayList<String>();
         idReceptor = "";
+    }
+
+    public Double getLatitude() {
+        return latitude;
+    }
+
+    public void setLatitude(Double latitude) {
+        this.latitude = latitude;
+    }
+
+    public Double getLongitude() {
+        return longitude;
+    }
+
+    public void setLongitude(Double longitude) {
+        this.longitude = longitude;
     }
 
     public String getId() {
@@ -158,7 +186,7 @@ public class Objeto implements Serializable {
                 '}';
     }
 
-    public void salvar(final Context context, final List<Bitmap> bitmaps) {
+    public void salvar(final Context context, final List<Bitmap> bitmaps, Double latitude, Double longitude) {
         StorageReference referenciaFirebase = ConfiguracaoFirebase.getStorageReference();
         DatabaseReference databaseReference = ConfiguracaoFirebase.getFirebase();
 
@@ -168,6 +196,12 @@ public class Objeto implements Serializable {
         id = objectRef.push().getKey();
         objectRef.child(id).setValue(this);
         objectRef.child(id).child(REFERENCE_IMAGE).setValue(imagens);
+
+        objectRef.child(id).child("latitude").setValue(latitude);
+        objectRef.child(id).child("longitude").setValue(longitude);
+
+
+
 
         Log.w("SAVE", String.valueOf(bitmaps.size()));
 
@@ -194,4 +228,7 @@ public class Objeto implements Serializable {
             }
         }
     }
+
+
+
 }
