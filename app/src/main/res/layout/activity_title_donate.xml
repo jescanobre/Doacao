@@ -30,6 +30,8 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:onClick="btnTitleOnClick"
-            android:text="Continue" />
+            android:text="Continue"
+            android:layout_marginLeft="30dp"
+            android:layout_marginRight="30dp"/>
     </LinearLayout>
 </android.support.constraint.ConstraintLayout>

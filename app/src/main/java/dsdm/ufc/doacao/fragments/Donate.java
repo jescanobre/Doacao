@@ -25,7 +25,6 @@ import dsdm.ufc.doacao.fragments.donate.TitleDonate;
 
 public class Donate extends Fragment {
 
-    private ImageAdapter imageAdapter;
     private static List<Bitmap> images = new ArrayList<Bitmap>();
     private MyImageView imagesView[];
 
@@ -58,7 +57,9 @@ public class Donate extends Fragment {
         for(int i = 1; i < 5; i++)
             imagesView[i].setStrokeButtonWidth(15);
 
-        for (int i = 0; i < 5; ++i)
+        for (int i = 0; i < 5; ++i) {
+            imagesView[i].setAdjustViewBounds(true);
+            imagesView[i].setScaleType(ImageView.ScaleType.CENTER_INSIDE);
             imagesView[i].setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
@@ -67,6 +68,7 @@ public class Donate extends Fragment {
                     fotoDialog.show(getFragmentManager(), "AddFotoDialog");
                 }
             });
+        }
 
         btn_done.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -86,15 +88,7 @@ public class Donate extends Fragment {
         });
 
 
-        GridView gridView = view.findViewById(R.id.layout_of_images);
-        this.imageAdapter = new ImageAdapter(getContext());
-
-        gridView.setAdapter(this.imageAdapter);
         return view;
-    }
-
-    public ImageAdapter getAdapter() {
-        return this.imageAdapter;
     }
 
     public static List<Bitmap> getImages() {

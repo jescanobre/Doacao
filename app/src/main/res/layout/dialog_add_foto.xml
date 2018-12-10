@@ -9,11 +9,15 @@
         android:id="@+id/add_foto_camera"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="câmera" />
+        android:text="câmera"
+        android:layout_marginLeft="30dp"
+        android:layout_marginRight="30dp"/>
 
     <Button
         android:id="@+id/add_foto_galeria"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="galeria" />
+        android:text="galeria"
+        android:layout_marginLeft="30dp"
+        android:layout_marginRight="30dp"/>
 </LinearLayout>

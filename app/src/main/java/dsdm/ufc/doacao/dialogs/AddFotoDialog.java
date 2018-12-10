@@ -36,6 +36,7 @@ import dsdm.ufc.doacao.managers.PermissionManager;
 
 public class AddFotoDialog extends DialogFragment {
 
+    private static Bitmap image;
     private ImageView imageView;
     private final int PICK_IMAGE_REQUEST    = 21;
     private final int REQUEST_IMAGE_CAPTURE = 22;
@@ -120,6 +121,8 @@ public class AddFotoDialog extends DialogFragment {
         if( bitmap != null && imageView != null )
             imageView.setImageBitmap(bitmap);
 
+        this.image = bitmap;
+
         AddFotoDialog.this.getDialog().cancel();
     }
 
@@ -129,5 +132,9 @@ public class AddFotoDialog extends DialogFragment {
 
     public void setImageView(ImageView imageView) {
         this.imageView = imageView;
+    }
+
+    public Bitmap getImage() {
+        return image;
     }
 }
