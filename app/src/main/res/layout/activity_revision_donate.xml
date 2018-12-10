@@ -1,17 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
+    tools:context=".fragments.donate.RevisionDonate"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    tools:context=".fragments.donate.RevisionDonate">
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="vertical"
-        tools:layout_editor_absoluteX="0dp"
-        tools:layout_editor_absoluteY="0dp">
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    tools:layout_editor_absoluteX="0dp"
+    tools:layout_editor_absoluteY="0dp">
 
         <GridView
             android:id="@+id/display_images"
@@ -85,7 +80,8 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:onClick="btnRevisionSend"
-            android:text="Enviar" />
+            android:text="Enviar"
+            android:layout_marginLeft="30dp"
+            android:layout_marginRight="30dp"/>
 
-    </LinearLayout>
-</android.support.constraint.ConstraintLayout>
+</LinearLayout>
