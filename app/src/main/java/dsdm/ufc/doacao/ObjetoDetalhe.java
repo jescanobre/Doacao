@@ -1,8 +1,13 @@
 package dsdm.ufc.doacao;
 
+import android.Manifest;
 import android.content.Intent;
+import android.content.pm.PackageManager;
+import android.location.Location;
 import android.net.Uri;
 import android.support.annotation.NonNull;
+import android.support.annotation.Nullable;
+import android.support.v4.app.ActivityCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.GridLayout;
@@ -14,6 +19,9 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.google.android.gms.common.ConnectionResult;
+import com.google.android.gms.common.api.GoogleApiClient;
+import com.google.android.gms.location.LocationServices;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -32,12 +40,17 @@ import dsdm.ufc.doacao.entidades.Usuarios;
 import dsdm.ufc.doacao.managers.GlideApp;
 import dsdm.ufc.doacao.managers.SessionManager;
 
-public class ObjetoDetalhe extends AppCompatActivity {
+public class ObjetoDetalhe extends AppCompatActivity implements GoogleApiClient.OnConnectionFailedListener, GoogleApiClient.ConnectionCallbacks {
 
 
     Button euQuero;
     TextView usuarioNome;
     GridLayout gridLayout;
+    private GoogleApiClient mGoogleApiClient;
+    Double latitude;
+    Double longitude;
+    Double objLat;
+    Double objLong;
 
     public static final String EXTRA_ID = "id";
 
@@ -83,6 +96,14 @@ public class ObjetoDetalhe extends AppCompatActivity {
                     procuraId(models.getIdDoador());
 
                     loadImages(models.getImagens());
+
+
+
+
+
+                    objLat = models.getLatitude();
+                    objLong = models.getLongitude();
+                    callConnection();
 
                 }
 
@@ -185,6 +206,77 @@ public class ObjetoDetalhe extends AppCompatActivity {
             }
         });
 
+
+    }
+
+
+    private synchronized void callConnection() {
+        System.out.println("TO FORA? ====================================== CHAMOU");
+
+        mGoogleApiClient = new GoogleApiClient.Builder(this).addOnConnectionFailedListener(this)
+                .addConnectionCallbacks(this)
+                .addApi(LocationServices.API)
+                .build();
+        mGoogleApiClient.connect();
+
+
+    }
+
+
+
+    public void onConnected(@Nullable Bundle bundle) {
+        if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
+            // TODO: Consider calling
+            //    ActivityCompat#requestPermissions
+            // here to request the missing permissions, and then overriding
+            //   public void onRequestPermissionsResult(int requestCode, String[] permissions,
+            //                                          int[] grantResults)
+            // to handle the case where the user grants the permission. See the documentation
+            // for ActivityCompat#requestPermissions for more details.
+            return;
+        }
+        Location l = LocationServices.FusedLocationApi.getLastLocation(mGoogleApiClient);
+        System.out.println("TO FORA? ======================================OIA");
+        System.out.println("TO FORA? ======================================OIA" + l);
+        if(l!=null){
+            System.out.println("TO DENTRO? OIA");
+            Log.i("LOGa", "Latitude: " + l.getLatitude());
+            latitude = l.getLatitude();
+            Log.i("LOGa", "Longitude: " + l.getLongitude());
+            longitude = l.getLongitude();
+
+            Location meuPonto = new Location("ponto A");
+            meuPonto.setLatitude(latitude);
+            meuPonto.setLongitude(longitude);
+            Log.i("TOGa", "Latitude1: " + latitude);
+            Log.i("TOGa", "Longitude1: " + longitude);
+
+
+            Location pontoObj = new Location("ponto B");
+            pontoObj.setLatitude(objLat);
+            pontoObj.setLongitude(objLong);
+
+            Log.i("TOGa", "Latitude2: " + objLat);
+            Log.i("TOGa", "Longitude2: " + objLong);
+
+            float distancia = meuPonto.distanceTo(pontoObj);
+            TextView txtDistancia = (TextView)findViewById(R.id.txtDistancia);
+            String oi = String.valueOf(distancia);
+            txtDistancia.setText(distancia + " metros");
+        }
+    }
+
+    public void onConnectionSuspended(int i) {
+
+    }
+
+    @Override
+    public void onConnectionFailed(@NonNull ConnectionResult connectionResult) {
+
+    }
+
+    @Override
+    public void onPointerCaptureChanged(boolean hasCapture) {
 
     }
 }

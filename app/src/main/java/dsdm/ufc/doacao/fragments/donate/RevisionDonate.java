@@ -1,8 +1,14 @@
 package dsdm.ufc.doacao.fragments.donate;
 
+import android.Manifest;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
+import android.location.Location;
+import android.support.annotation.NonNull;
+import android.support.annotation.Nullable;
+import android.support.v4.app.ActivityCompat;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -11,6 +17,10 @@ import android.view.View;
 import android.widget.EditText;
 import android.widget.GridView;
 import android.widget.RadioButton;
+
+import com.google.android.gms.common.ConnectionResult;
+import com.google.android.gms.common.api.GoogleApiClient;
+import com.google.android.gms.location.LocationServices;
 
 import java.util.List;
 
@@ -21,19 +31,22 @@ import dsdm.ufc.doacao.entidades.Objeto;
 import dsdm.ufc.doacao.fragments.Donate;
 import dsdm.ufc.doacao.managers.SessionManager;
 
-public class RevisionDonate extends AppCompatActivity {
+public class RevisionDonate extends AppCompatActivity implements GoogleApiClient.OnConnectionFailedListener, GoogleApiClient.ConnectionCallbacks {
 
     private EditText edtTitle;
     private EditText edtDescription;
     private RadioButton rbUsed;
     private RadioButton rbNotUsed;
     private SessionManager session;
+    private GoogleApiClient mGoogleApiClient;
+    Double latitude;
+    Double longitude;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_revision_donate);
-
+        callConnection();
         session = new SessionManager(getApplicationContext());
 
         Objeto objeto = (Objeto) getIntent().getSerializableExtra("objeto");
@@ -71,8 +84,13 @@ public class RevisionDonate extends AppCompatActivity {
                         Log.w("User", session.getUser().toString());
                         objeto.setIdDoador(session.getUser().getId());
 
-                        objeto.salvar(getApplicationContext(), Donate.getImages() );
+//<<<<<<< HEAD
 
+                        objeto.salvar(getApplicationContext(), Donate.getImages(), latitude, longitude);
+//=======
+//                        objeto.salvar(getApplicationContext(), Donate.getImages() );
+//
+//>>>>>>> master
                         Intent intent = new Intent(RevisionDonate.this, MainActivity.class);
                         startActivity(intent);
                         finish();
@@ -99,6 +117,9 @@ public class RevisionDonate extends AppCompatActivity {
             objeto.setDescricao(description);
         if( !objeto.getEhUsado().equals(status) )
             objeto.setEhUsado(status);
+
+        callConnection();
+
     }
 
     public void displayImages() {
@@ -107,5 +128,55 @@ public class RevisionDonate extends AppCompatActivity {
         adapter.add(bitmaps);
         GridView gridView = findViewById(R.id.display_images);
         gridView.setAdapter(adapter);
+    }
+
+    private synchronized void callConnection() {
+        System.out.println("TO FORA? ====================================== CHAMOU");
+
+        mGoogleApiClient = new GoogleApiClient.Builder(this).addOnConnectionFailedListener(this)
+                .addConnectionCallbacks(this)
+                .addApi(LocationServices.API)
+                .build();
+        mGoogleApiClient.connect();
+
+
+    }
+
+
+
+    public void onConnected(@Nullable Bundle bundle) {
+        if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
+            // TODO: Consider calling
+            //    ActivityCompat#requestPermissions
+            // here to request the missing permissions, and then overriding
+            //   public void onRequestPermissionsResult(int requestCode, String[] permissions,
+            //                                          int[] grantResults)
+            // to handle the case where the user grants the permission. See the documentation
+            // for ActivityCompat#requestPermissions for more details.
+            return;
+        }
+        Location l = LocationServices.FusedLocationApi.getLastLocation(mGoogleApiClient);
+        System.out.println("TO FORA? ======================================OIA");
+        System.out.println("TO FORA? ======================================OIA" + l);
+        if(l!=null){
+            System.out.println("TO DENTRO? OIA");
+            Log.i("LOGa", "Latitude: " + l.getLatitude());
+            latitude = l.getLatitude();
+            Log.i("LOGa", "Longitude: " + l.getLongitude());
+            longitude = l.getLongitude();
+        }
+    }
+
+    public void onConnectionSuspended(int i) {
+
+    }
+
+    public void onConnectionFailed(@NonNull ConnectionResult connectionResult) {
+
+    }
+
+    @Override
+    public void onPointerCaptureChanged(boolean hasCapture) {
+
     }
 }
