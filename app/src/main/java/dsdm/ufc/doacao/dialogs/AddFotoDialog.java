@@ -36,8 +36,15 @@ import dsdm.ufc.doacao.managers.PermissionManager;
 
 public class AddFotoDialog extends DialogFragment {
 
+    private static Bitmap image;
+    private ImageView imageView;
     private final int PICK_IMAGE_REQUEST    = 21;
     private final int REQUEST_IMAGE_CAPTURE = 22;
+
+    public AddFotoDialog() {
+
+    }
+
     @NonNull
     @Override
     public Dialog onCreateDialog(@Nullable Bundle savedInstanceState) {
@@ -94,35 +101,40 @@ public class AddFotoDialog extends DialogFragment {
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
 
+        Bitmap bitmap = null;
+
         if( requestCode == this.PICK_IMAGE_REQUEST && resultCode == Activity.RESULT_OK
             && data != null && data.getData() != null ) {
             Uri path = data.getData();
 
-            GridView gridView = getActivity().findViewById(R.id.layout_of_images);
-            ImageAdapter imageAdapter = (ImageAdapter) gridView.getAdapter();
-
             try {
-                Bitmap bitmap = MediaStore.Images.Media.getBitmap(getActivity().getContentResolver(), path);
-
-                imageAdapter.add(bitmap);
-                imageAdapter.notifyDataSetChanged();
-
-                Donate.getImages().add(bitmap);
+                bitmap = MediaStore.Images.Media.getBitmap(getActivity().getContentResolver(), path);
             } catch (IOException e) {
                 e.printStackTrace();
             }
         } else if( requestCode == this.REQUEST_IMAGE_CAPTURE && resultCode == Activity.RESULT_OK
                 && data != null && data.getExtras() != null ) {
             Bundle extras = data.getExtras();
-            Bitmap bitmap = (Bitmap) extras.get("data");
-
-            GridView gridView = getActivity().findViewById(R.id.layout_of_images);
-            ImageAdapter imageAdapter = (ImageAdapter) gridView.getAdapter();
-
-            imageAdapter.add(bitmap);
-            imageAdapter.notifyDataSetChanged();
-
-            Donate.getImages().add(bitmap);
+            bitmap = (Bitmap) extras.get("data");
         }
+
+        if( bitmap != null && imageView != null )
+            imageView.setImageBitmap(bitmap);
+
+        this.image = bitmap;
+
+        AddFotoDialog.this.getDialog().cancel();
+    }
+
+    public ImageView getImageView() {
+        return imageView;
+    }
+
+    public void setImageView(ImageView imageView) {
+        this.imageView = imageView;
+    }
+
+    public Bitmap getImage() {
+        return image;
     }
 }

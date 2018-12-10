@@ -84,8 +84,13 @@ public class RevisionDonate extends AppCompatActivity implements GoogleApiClient
                         Log.w("User", session.getUser().toString());
                         objeto.setIdDoador(session.getUser().getId());
 
+//<<<<<<< HEAD
 
                         objeto.salvar(getApplicationContext(), Donate.getImages(), latitude, longitude);
+//=======
+//                        objeto.salvar(getApplicationContext(), Donate.getImages() );
+//
+//>>>>>>> master
                         Intent intent = new Intent(RevisionDonate.this, MainActivity.class);
                         startActivity(intent);
                         finish();

@@ -22,13 +22,17 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:onClick="btnUsedOnCLick"
-            android:text="usado" />
+            android:text="usado"
+            android:layout_marginLeft="30dp"
+            android:layout_marginRight="30dp"/>
 
         <Button
             android:id="@+id/btn_not_used"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:onClick="btnUsedOnCLick"
-            android:text="não usado" />
+            android:text="não usado"
+            android:layout_marginLeft="30dp"
+            android:layout_marginRight="30dp"/>
     </LinearLayout>
 </android.support.constraint.ConstraintLayout>
