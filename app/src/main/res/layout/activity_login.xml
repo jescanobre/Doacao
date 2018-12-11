@@ -30,13 +30,23 @@ tools:context=".login">
         android:id="@+id/loginButton"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Login" />
+        android:text="Login"
+        android:layout_marginLeft="30dp"
+        android:layout_marginRight="30dp"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentLeft="true"
+        android:layout_marginBottom="60dp"/>
 
     <Button
         android:id="@+id/cadastroButton"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Cadastro" />
+        android:text="Cadastro"
+        android:layout_marginLeft="30dp"
+        android:layout_marginRight="30dp"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentLeft="true"
+        android:layout_marginBottom="60dp"/>
 </LinearLayout>
 
 </android.support.constraint.ConstraintLayout>
