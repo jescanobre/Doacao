@@ -238,7 +238,7 @@ public class ObjetoDetalhe extends AppCompatActivity implements GoogleApiClient.
         Location l = LocationServices.FusedLocationApi.getLastLocation(mGoogleApiClient);
         System.out.println("TO FORA? ======================================OIA");
         System.out.println("TO FORA? ======================================OIA" + l);
-        if(l!=null){
+        if(l!=null && objLat  != null && objLong != null){
             System.out.println("TO DENTRO? OIA");
             Log.i("LOGa", "Latitude: " + l.getLatitude());
             latitude = l.getLatitude();

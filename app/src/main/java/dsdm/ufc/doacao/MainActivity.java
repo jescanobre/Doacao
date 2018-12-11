@@ -38,6 +38,11 @@ public class MainActivity extends AppCompatActivity {
                     "Permissão de reboot", "Precisamos da permissão para podermos notificar sobre o aplicativo.");
         }
 
+        if( !PermissionManager.checkPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION) ) {
+            PermissionManager.requestPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION, 01,
+                    "Permissão de acesso a localização", "Precisamos da permissão para podermos acessar sua localização.");
+        }
+
         if(Donate.getImages() != null)
             Donate.getImages().clear();
 
