@@ -2,6 +2,7 @@ package dsdm.ufc.doacao;
 
 import android.content.Intent;
 import android.support.annotation.NonNull;
+import android.support.design.widget.TextInputEditText;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -48,8 +49,8 @@ public class login extends AppCompatActivity {
         loginBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                EditText tlogin = (EditText) findViewById(R.id.emailText);
-                EditText tsenha = (EditText) findViewById(R.id.passText);
+                TextInputEditText tlogin = (TextInputEditText) findViewById(R.id.emailText);
+                TextInputEditText tsenha = (TextInputEditText) findViewById(R.id.passText);
 
                 String login = tlogin.getText().toString();
                 String senha = tsenha.getText().toString();

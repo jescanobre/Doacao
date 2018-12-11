@@ -17,6 +17,7 @@ import android.view.View;
 import android.widget.EditText;
 import android.widget.GridView;
 import android.widget.RadioButton;
+import android.widget.Toast;
 //import com.google.android.gms.location.LocationServices;
 
 import com.google.android.gms.common.ConnectionResult;
@@ -72,6 +73,19 @@ public class RevisionDonate extends AppCompatActivity implements GoogleApiClient
     }
 
     public void btnRevisionSend(View view) {
+        Objeto objeto = (Objeto) getIntent().getSerializableExtra("objeto");
+        updateObjeto(objeto);
+
+        if( objeto.getTitulo().isEmpty() ) {
+            Toast.makeText(this, "Insira um titulo!", Toast.LENGTH_SHORT).show();
+            return;
+        }
+
+        if( objeto.getDescricao().isEmpty() ) {
+            Toast.makeText(this, "Insira uma descrição!", Toast.LENGTH_SHORT).show();
+            return;
+        }
+
         AlertDialog.Builder builder = new AlertDialog.Builder(RevisionDonate.this);
         builder.setMessage("Deseja finalizar doação?")
                 .setTitle("Confirmação")
@@ -85,13 +99,8 @@ public class RevisionDonate extends AppCompatActivity implements GoogleApiClient
                         Log.w("User", session.getUser().toString());
                         objeto.setIdDoador(session.getUser().getId());
 
-//<<<<<<< HEAD
-
                         objeto.salvar(getApplicationContext(), Donate.getImages(), latitude, longitude);
-//=======
-//                        objeto.salvar(getApplicationContext(), Donate.getImages() );
-//
-//>>>>>>> master
+
                         Intent intent = new Intent(RevisionDonate.this, MainActivity.class);
                         startActivity(intent);
                         finish();

@@ -41,13 +41,15 @@ public class FazerSolicitacao extends AppCompatActivity {
                 service.putExtra(SaveSolicitacaoService.EXTRA_SOLICITACAO, new Solicitacao(mensagem,usuarioId, objetoId,false));
                 startService(service);
 
-                Intent intent = new Intent(FazerSolicitacao.this,ObjetoDetalhe.class);
+                Intent intent = new Intent(FazerSolicitacao.this,MainActivity.class);
                 intent.putExtra(ObjetoDetalhe.EXTRA_ID, objetoId);
+                intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
                 startActivity(intent);
-                finish();
                 Toast.makeText(FazerSolicitacao.this, "Solicitação enviada!", Toast.LENGTH_SHORT).show();
+                FazerSolicitacao.this.finish();
             }
         });
+
 
     }
 }

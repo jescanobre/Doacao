@@ -12,6 +12,7 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.GridView;
 import android.widget.ImageView;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -81,9 +82,13 @@ public class Donate extends Fragment {
                     }
                 }
 
-                Intent intent = new Intent(getActivity(), TitleDonate.class);
-                intent.putExtra("objeto", new Objeto());
-                startActivity(intent);
+                if( !Donate.getImages().isEmpty() ) {
+                    Intent intent = new Intent(getActivity(), TitleDonate.class);
+                    intent.putExtra("objeto", new Objeto());
+                    startActivity(intent);
+                } else {
+                    Toast.makeText(getContext(), "Insira pelo menos uma imagem!", Toast.LENGTH_SHORT).show();
+                }
             }
         });
 

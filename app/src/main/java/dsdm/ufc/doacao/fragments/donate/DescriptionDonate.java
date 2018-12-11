@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Toast;
 
 import dsdm.ufc.doacao.R;
 import dsdm.ufc.doacao.entidades.Objeto;
@@ -21,10 +22,14 @@ public class DescriptionDonate extends AppCompatActivity {
     public void btnDescriptionOnClick(View view) {
         EditText editText = findViewById(R.id.edt_description);
         String description = editText.getText().toString();
-        Intent intent = new Intent( DescriptionDonate.this, StatusDonate.class );
-        Objeto objeto = (Objeto) getIntent().getSerializableExtra("objeto");
-        objeto.setDescricao(description);
-        intent.putExtra("objeto", objeto);
-        startActivity(intent);
+        if(description == null || description.isEmpty()) {
+            Toast.makeText(this, "Insira uma descrição!", Toast.LENGTH_SHORT).show();
+        } else {
+            Intent intent = new Intent(DescriptionDonate.this, StatusDonate.class);
+            Objeto objeto = (Objeto) getIntent().getSerializableExtra("objeto");
+            objeto.setDescricao(description);
+            intent.putExtra("objeto", objeto);
+            startActivity(intent);
+        }
     }
 }
