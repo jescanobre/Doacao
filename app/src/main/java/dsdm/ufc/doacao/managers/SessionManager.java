@@ -49,9 +49,16 @@ public class SessionManager {
 
         Intent intent = new Intent(context, login.class);
         intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-        intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+        intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK| Intent.FLAG_ACTIVITY_CLEAR_TASK);
 
         context.startActivity(intent);
+
+//        Intent intent = new Intent(context, login.class);
+//        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+////        intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+//        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+//        context.startActivity(intent);
+//        Intent.this.finish();
     }
 
     public boolean isLoggedIn() {
